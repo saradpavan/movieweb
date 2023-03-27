@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sp movies</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body style="background: #111111f1;">
+    <!----------navigation------------>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <button><img src="{% static 'images/menu.png' %}" class="menu-icon"></button>
+            <a href="{% url 'homeget' %}"><b>sp flims</b></a>
+
+        </div>
+        <div class="nav-right flex-div">
+            <div class="login-div flex-div">
+                <a href="{% url 'homeget' %}">
+                    <h4>HOME</h4>
+                </a>
+
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <div class="menu">
+
+        <ul>
+            <li><a href="{% url 'homeget' %}">home</a></li>
+            <li><a href="{% url 'language' %}">languages</a></li>
+            <li><a href="{% url 'dubbed' %}">dubbed movies</a></li>
+            <li><a href="{% url 'contact' %}">contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">log out</a></li>
+            {% endif %}
+        </ul>
+    </div>
+   
+
+
+
+    <section id="movie-page">
+        <div class="movie-container">
+            <div class="movie-list-container">
+                <div class="movie-photo">
+                    <img src="{{ movie.img.url}}" >
+                </div>
+
+                <div class="movie-info">
+                    <span>{{movie.year}}</span><br>
+                    <strong>{{movie.name}}</strong>
+                </div>
+                <div class="play-download">
+                    <button><a href="{% url 'playvideo' movie.id %}"  style="color: #fff;">play video</a></button>
+                    <button><a href="{{movie.video.url}}" download="{{movie.video.url}}" style="color: #fff;"> download </a> </button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-contact">
+            <h5>contact | sarad pavan</h5>
+        </div>
+        <div class="sp-movies">
+            <h5>@ sp movies</h5>
+        </div>
+    </footer>
+    
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

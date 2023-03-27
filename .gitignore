@@ -1,0 +1,5 @@
+bin/
+lib/
+Scripts/
+pyvenv.cfg
+*.sqlite3

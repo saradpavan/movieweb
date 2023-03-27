@@ -1,0 +1,102 @@
+{% load static %}
+{% static "photos" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sp movies</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body style="color: #111111f1;">
+    <!----------navigation------------>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <button><img src="{% static 'images/menu.png' %}" class="menu-icon"></button>
+            <a href="index.html"><b>sp movies</b></a>
+
+        </div>
+        <div class="nav-middle flex-div">
+            <div class="search-box flex-div">
+                <form action="search" method="get" >
+                    {% csrf_token %}
+                
+                    <input type="text" placeholder="search" name="search">
+                <button type="submit"><img src="{% static 'images/search.png' %}"></button>
+                </form>
+            </div>
+        </div>
+        <div class="nav-right flex-div">
+            <div class="login-div flex-div">
+                {% if user.is_authenticated %}
+                    <a href=""><h4>hello {{user.first_name}} {{user.last_name}}</h4></a>
+                {% else %}
+                <a href="{% url 'login' %}">
+                    <h4>login / signup</h4>
+                </a>
+                {% endif %}
+                
+            </div>
+        </div>
+
+
+    </nav>
+
+
+
+    <div class="menu">
+
+        <ul>
+            <li><a href="{% url 'homeget' %}">home</a></li>
+            <li><a href="{% url 'language' %}">languages</a></li>
+            <li><a href="{% url 'dubbed' %}">dubbed movies</a></li>
+            <li><a href="{% url 'contact' %}">contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">log out</a></li>
+            {% endif %}        </ul>
+    </div>
+    
+    <section>
+
+        <div class="list-container">
+            {% for i in movie reversed %}
+            <div class="movie">
+                
+                <div class="movie-image">
+                    <a href="{% url 'moviepage' i.id %}"><img src="{{i.img.url}}" class="photo"></a>
+                </div>
+                
+                <div class="movie-info">
+                    <span>{{i.year}}</span><br>
+                    <a href="{% url 'moviepage' i.id %}"><strong>{{i.name}}</strong></a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="footer-contact">
+            <h5>contact | sarad pavan</h5>
+        </div>
+        <div class="sp-movies">
+            <h5>@ sp movies</h5>
+        </div>
+    </footer>
+    
+
+    
+
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+</body>
+
+</html>

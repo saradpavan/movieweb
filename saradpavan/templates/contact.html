@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sp movies</title>
+    <link rel="stylesheet" href="{% static 'css/contact-language.css' %}">
+</head>
+
+<body style="background:#111111f1">
+    <!----------navigation------------>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <button><img src="{% static 'images/menu.png' %}" class="menu-icon"></button>
+            <a href="{% url 'homeget' %}"><b>sp flims</b></a>
+
+        </div>
+        <div class="nav-right flex-div">
+            <div class="login-div flex-div">
+                <a href="{% url 'homeget' %}">
+                    <h4>HOME</h4>
+                </a>
+
+            </div>
+        </div>
+
+
+    </nav>
+
+    <div class="menu">
+
+        <ul>
+            <li><a href="{% url 'homeget' %}">home</a></li>
+            <li><a href="{% url 'language' %}">languages</a></li>
+            <li><a href="{% url 'dubbed' %}">dubbed movies</a></li>
+            <li><a href="{% url 'contact' %}">contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">log out</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    
+
+    <div class="contact">
+        <div class="contact-2">
+            <div class="contact-top">
+                <h1>
+                    contact us
+                </h1>
+                
+            </div>
+            <div class="contact-bottom">
+                <form action="{% url 'contact' %}" method="post">
+                    {% csrf_token %}
+                    {{messages.info}}
+                    <label for="">Full Name*</label>
+                    <input type="text" name="name">
+                    <label for="">E-mail*</label>
+                    <input type="email"  name="email" required>
+                    <label for="">Message</label>
+                    <input type="text" class="message-input" name="message" required>
+                    <button type="submit">submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-contact">
+            <h5>contact | sarad pavan</h5>
+        </div>
+        <div class="sp-movies">
+            <h5>@ sp movies</h5>
+        </div>
+    </footer>
+    
+    
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

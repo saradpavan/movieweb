@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+</head>
+
+<body style="background:#111111f1">
+    <!----------navigation------------>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <button><img src="{% static 'images/menu.png' %}" class="menu-icon"></button>
+            <a href="{% url 'homeget' %}"><b>sp flims</b></a>
+
+        </div>
+        <div class="nav-right flex-div">
+            <div class="login-div flex-div">
+                <a href="{% url 'homeget' %}">
+                    <h4>HOME</h4>
+                </a>
+
+            </div>
+        </div>
+
+
+    </nav>
+
+    <div class="menu">
+
+        <ul>
+            <li><a href="{% url 'homeget' %}">home</a></li>
+            <li><a href="{% url 'language' %}">languages</a></li>
+            <li><a href="{% url 'dubbed' %}">dubbed movies</a></li>
+            <li><a href="{% url 'contact' %}">contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">log out</a></li>
+            {% endif %}        </ul>
+    </div>
+    
+
+    <div class="language-details">
+        <h1>Search Results</h1>  
+       
+
+    </div>
+    <div class="list-container">
+        <h3>
+            {% for message in messages %}
+        <h3 style="color: rgb(241, 15, 15);">{{message}}</h3>
+        {% endfor %}
+        </h3>
+    </div>
+
+
+
+
+        <div class="list-container">
+            {% for i in searched %}
+            <div class="movie">
+                
+                <div class="movie-image">
+                    <a href="{% url 'moviepage' i.id %}"><img src="{{i.img.url}}" class="photo"></a>
+                </div>
+                
+                <div class="movie-info">
+                    <span>{{i.year}}</span><br>
+                    <a href="{% url 'moviepage' i.id %}"><strong>{{i.name}}</strong></a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+
+
+    <footer>
+        <div class="footer-contact">
+            <h5>contact | sarad pavan</h5>
+        </div>
+        <div class="sp-movies">
+            <h5>@ sp movies</h5>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
